@@ -134,9 +134,6 @@ def main():
     except e as i:
         print(i)
 
-    print("llego")
-    print(rutina)
-
     """ rutina is a list of the tuples in the file, subrutina is a list with all of the elements of each rutina"""
     for element in rutina:
         cadena=str(element)
