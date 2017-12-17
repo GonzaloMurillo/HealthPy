@@ -26,7 +26,7 @@ def draw_grid_and_titles(total_minutes):
     plt.xlabel('MINUTES')
     plt.xlim(1, total_minutes)
     plt.ylabel('BPM')
-    plt.title('Rutina de Entrenamiento')
+    plt.title('Training Routine')
 
 """ Draw the cardio zones"""
 def draw_zones(Z1,Z2,Z3,Z4,Z5,total_minutes):
@@ -35,34 +35,37 @@ def draw_zones(Z1,Z2,Z3,Z4,Z5,total_minutes):
     texto3 = "Z3=%d-%d bpm" % (int(Z3[0]), int(Z3[1]))
     texto4 = "Z4=%d-%d bpm" % (int(Z4[0]), int(Z4[1]))
     texto5 = "Z5=%d-%d bpm" % (int(Z5[0]), int(Z5[1]))
-    plt.text((total_minutes / 2) - len(texto1), Z1[1] / 2, texto1, size="large", alpha=1)
+    plt.text((total_minutes ) - len(texto1), Z1[0]+3, texto1, size="large", alpha=1)
     plt.text(50 - len(texto2), Z2[0] + 3, texto2, size="large", alpha=1)
     plt.text(50 - len(texto3), Z3[0] + 3, texto3, size="large", alpha=1)
     plt.text(50 - len(texto4), Z4[0] + 3, texto4, size="large", alpha=1)
     plt.text(50 - len(texto5), Z5[0] + 3, texto5, size="large", alpha=1)
 
 def draw_cardio_zones(Z1,Z2,Z3,Z4,Z5,total_minutes):
-    plt.axhspan(0, Z1[1], facecolor='c', alpha=0.5, zorder=0)
-    plt.axhspan(Z1[1], Z2[1], facecolor='b', alpha=0.5, zorder=0)
-    plt.axhspan(Z2[1], Z3[1], facecolor='g', alpha=0.5, zorder=0)
-    plt.axhspan(Z3[1], Z4[1], facecolor='y', alpha=0.5, zorder=0)
-    plt.axhspan(Z4[1], Z5[1], facecolor='r', alpha=0.5, zorder=0)
-    texto1 = "Z1=%d-%d bpm" % (int(Z1[0]), int(Z1[1]))
-    texto2 = "Z2=%d-%d bpm" % (int(Z2[0]), int(Z2[1]))
-    texto3 = "Z3=%d-%d bpm" % (int(Z3[0]), int(Z3[1]))
-    texto4 = "Z4=%d-%d bpm" % (int(Z4[0]), int(Z4[1]))
-    texto5 = "Z5=%d-%d bpm" % (int(Z5[0]), int(Z5[1]))
-    plt.text((total_minutes / 2) - len(texto1), Z1[1] / 2, texto1, size="large", alpha=1)
+
+    plt.axhspan(Z4[1], Z5[1], facecolor='r', alpha=0.5, zorder=0,label="Z5 Maximum")
+    plt.axhspan(Z3[1], Z4[1], facecolor='y', alpha=0.5, zorder=0, label="Z4 Anaerobic")
+    plt.axhspan(Z2[1], Z3[1], facecolor='g', alpha=0.5, zorder=0, label="Z3 Aerobic")
+    plt.axhspan(Z1[1], Z2[1], facecolor='b', alpha=0.5, zorder=0, label="Z2 Burn fat")
+    plt.axhspan(Z1[0], Z1[1], facecolor='c', alpha=0.5, zorder=0, label="Z1 Recovery")
+    #plt.axhspan(0, Z1[0], facecolor='c', alpha=0.5, zorder=0, label="Z1 Recovery")
+
+    texto1 = "Z1=%d-%d bpm" % (int(Z1[0]), int(Z1[1]))+" (50-60%) FCM"
+    texto2 = "Z2=%d-%d bpm" % (int(Z2[0]), int(Z2[1]))+" (60-70%) FCM"
+    texto3 = "Z3=%d-%d bpm" % (int(Z3[0]), int(Z3[1]))+" (70-80%) FCM"
+    texto4 = "Z4=%d-%d bpm" % (int(Z4[0]), int(Z4[1]))+" (80-90%) FCM"
+    texto5 = "Z5=%d-%d bpm" % (int(Z5[0]), int(Z5[1]))+" (90-100%) FCM"
+    plt.text(50 - len(texto1), Z1[0] + 3180, texto1, size="large", alpha=1)
     plt.text(50 - len(texto2), Z2[0] + 3, texto2, size="large", alpha=1)
     plt.text(50 - len(texto3), Z3[0] + 3, texto3, size="large", alpha=1)
     plt.text(50 - len(texto4), Z4[0] + 3, texto4, size="large", alpha=1)
-    plt.text(50 - len(texto5), Z5[0] + 3, texto5, size="large", alpha=1)
+    plt.text(50 - len(texto5)+1, Z5[0] + 3, texto5, size="large", alpha=1)
 
 
 """ This function plots the lines in the graph"""
 def plot_graph(x,y,total_minutes,plt,MaxBPM,AllChanges,coordinates_to_plot):
     plt.plot(x, color="blue", linewidth=2.5, linestyle="-", label="BPM", zorder=2)
-    plt.plot(y, color="red", linewidth=2.5, linestyle=":", label="Cadence", zorder=3)
+    plt.plot(y, color="red", linewidth=2.5, linestyle=":", label="Cadence",zorder=3)
 
     plt.legend(loc='upper left', frameon=False)
     plt.xticks(np.arange(0, total_minutes, 5))  # Prints the x axe with intervals of 5
@@ -74,7 +77,7 @@ def plot_graph(x,y,total_minutes,plt,MaxBPM,AllChanges,coordinates_to_plot):
         if (int(item) < len(coordinates_to_plot)):
             text = "Change in minute " + str(item) + " to " + str(
                 coordinates_to_plot[int(item)]) + " bpm " + "from " + str(coordinates_to_plot[int(item) - 1])
-            plt.text(x - len(text) * 1.2, y, text, ha="left", size="medium", alpha=1)
+            plt.text(total_minutes/2, y, text, ha="center",size="medium", alpha=1)
 
 """ This function calculates the heart zones based in Karvonen formula"""
 
