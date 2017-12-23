@@ -26,21 +26,9 @@ def draw_grid_and_titles(total_minutes):
     plt.xlabel('MINUTES')
     plt.xlim(1, total_minutes)
     plt.ylabel('BPM')
-    plt.title('Training Routine')
+    plt.title('Training Routine\nZones based in Karvonen Formula')
 
-""" Draw the cardio zones"""
-def draw_zones(Z1,Z2,Z3,Z4,Z5,total_minutes):
-    texto1 = "Z1=%d-%d bpm" % (int(Z1[0]), int(Z1[1]))
-    texto2 = "Z2=%d-%d bpm" % (int(Z2[0]), int(Z2[1]))
-    texto3 = "Z3=%d-%d bpm" % (int(Z3[0]), int(Z3[1]))
-    texto4 = "Z4=%d-%d bpm" % (int(Z4[0]), int(Z4[1]))
-    texto5 = "Z5=%d-%d bpm" % (int(Z5[0]), int(Z5[1]))
-    plt.text((total_minutes ) - len(texto1), Z1[0]+3, texto1, size="large", alpha=1)
-    plt.text(50 - len(texto2), Z2[0] + 3, texto2, size="large", alpha=1)
-    plt.text(50 - len(texto3), Z3[0] + 3, texto3, size="large", alpha=1)
-    plt.text(50 - len(texto4), Z4[0] + 3, texto4, size="large", alpha=1)
-    plt.text(50 - len(texto5), Z5[0] + 3, texto5, size="large", alpha=1)
-
+""" Draw the cardio zones """
 def draw_cardio_zones(Z1,Z2,Z3,Z4,Z5,total_minutes):
 
     plt.axhspan(Z4[1], Z5[1], facecolor='r', alpha=0.5, zorder=0,label="Z5 Maximum")
@@ -55,11 +43,11 @@ def draw_cardio_zones(Z1,Z2,Z3,Z4,Z5,total_minutes):
     texto3 = "Z3=%d-%d bpm" % (int(Z3[0]), int(Z3[1]))+" (70-80%) FCM"
     texto4 = "Z4=%d-%d bpm" % (int(Z4[0]), int(Z4[1]))+" (80-90%) FCM"
     texto5 = "Z5=%d-%d bpm" % (int(Z5[0]), int(Z5[1]))+" (90-100%) FCM"
-    plt.text(50 - len(texto1), Z1[0] + 3180, texto1, size="large", alpha=1)
-    plt.text(50 - len(texto2), Z2[0] + 3, texto2, size="large", alpha=1)
-    plt.text(50 - len(texto3), Z3[0] + 3, texto3, size="large", alpha=1)
-    plt.text(50 - len(texto4), Z4[0] + 3, texto4, size="large", alpha=1)
-    plt.text(50 - len(texto5)+1, Z5[0] + 3, texto5, size="large", alpha=1)
+    plt.text(50 - len(texto1), Z1[0] + 5, texto1, size="large", alpha=1)
+    plt.text(50 - len(texto2), Z2[0] + 5, texto2, size="large", alpha=1)
+    plt.text(50 - len(texto3), Z3[0] + 5, texto3, size="large", alpha=1)
+    plt.text(50 - len(texto4), Z4[0] + 5, texto4, size="large", alpha=1)
+    plt.text(50 - len(texto5)+1, Z5[0] + 5, texto5, size="large", alpha=1)
 
 
 """ This function plots the lines in the graph"""
@@ -165,7 +153,7 @@ def main():
                 PassedMinutes=PassedMinutes+int(k)
                 Change = (int(PassedMinutes))
               AllChanges.append(Change)
-    print("changes")
+    print("Were the interval changes:")
     print(AllChanges)
     for (pos,j) in enumerate(valores): #enumerate very useful
         if (pos in auxiliar1): # This is a trick just to extract the bpm
@@ -198,8 +186,6 @@ def main():
     draw_grid_and_titles(total_minutes)
     draw_cardio_zones(Z1, Z2, Z3, Z4, Z5,total_minutes)
     plot_graph(x,y,total_minutes,plt,MaxBPM,AllChanges,coordinates_to_plot)
-
-
 
 
     """ Annotations
