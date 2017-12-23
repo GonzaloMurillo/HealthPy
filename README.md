@@ -2,7 +2,7 @@
 
 A collection of Python scripts oriented to health / sport training enthusiasts.
 
-plotmytrainig.py 
+plotmytraining.py 
 
 This scripts helps to draw training routines mostly for winter training in the roller. 
 The way it works is taking the input from a file with the following format:
