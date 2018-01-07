@@ -13,10 +13,9 @@ def clear_screen():
 
 def makeittupla(l):
     tupla=tuple()
-    if "x" in l:
+    if ("X" in l):
         if(l): # Pythonic way of saying not empty string
-            t=l.strip(",")
-            tupla=(t) # This is very interesting makes the string a tuple, without splitting its elements
+            tupla=(l) # This is very interesting makes the string a tuple, without splitting its elements
             return tupla
     return (-1) # If we arrive here is because the string was empty
 
@@ -117,6 +116,7 @@ def main():
     try:
         with open(file,'r') as file_object:
          for l in file_object:
+             l=l.upper() # We make it uppercase to avoid problems between 'x' and 'X' as delimiter
              tupla=makeittupla(l.rstrip("\n"))
              if(tupla!=-1):
                  rutina.append(tupla)
@@ -125,10 +125,11 @@ def main():
     except e as i:
         print(i)
 
+
     """ rutina is a list of the tuples in the file, subrutina is a list with all of the elements of each rutina"""
     for element in rutina:
         cadena=str(element)
-        subrutina=cadena.split('x')
+        subrutina=cadena.split('X')
         for x in subrutina:
             valores.append(x) # valores contains all the independen values.
 
@@ -201,5 +202,5 @@ def main():
 
     plt.subplots_adjust(top=0.92, bottom=0.08, left=0.10, right=0.95, hspace=0.25,wspace=0.35)
     plt.show()
-if __name__ =="__main__":
+if __name__ == "__main__":
     main()
